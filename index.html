@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Endcryptor - End-to-end encryption intermediary in JavaScript</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <header class="text-center">
+          <h1>Endcryptor</h1>
+          <div>
+            <span>End-to-end encryption intermediary in JavaScript.</span>
+            <a href="https://github.com/endcryptor/endcryptor.github.io" target="_blank">GitHub</a>
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="currentColor" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
+              <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+            </svg>
+          </div>
+          <nav>
+            <button type="button" id="tab-btn-1" class="tab" onclick="selectTab(1)">Create</button>
+            <button type="button" id="tab-btn-2" class="tab" onclick="selectTab(2)">Confirm</button>
+            <button type="button" id="tab-btn-3" class="tab" onclick="selectTab(3)">Encrypt/Decrypt</button>
+          </nav>
+        </header>
+        <div id="tab-1">
+          <p>
+            <label for="password-1">Password:</label>
+            <input type="password" id="password-1" placeholder="min. length: 10" maxlength="100" autocomplete="off">
+          </p>
+          <p>
+            <label for="iterations">PBKDF2 iterations:</label>
+            <span id="iterations-output"></span>
+            <input type="range" oninput="setIterations()" id="iterations" min="100000" max="1000000" value="500000" autocomplete="off">
+            <small>Increasing the iterations increases the encryption key generation time.</small>
+          </p>
+          <p class="text-center">
+            <button type="button" onclick="createConfiguration1()">Create and copy configuration</button>
+          </p>
+          <p id="my-config-p-1" class="d-none">
+            <span>My configuration:</span><br>
+            <span id="my-config-1" class="wb-all"></span><br><br>
+            <span>Copied. Send your configuration to your interlocutor to confirm the exchange.</span>
+          </p>
+        </div>
+        <div id="tab-2" class="d-none">
+          <p>
+            <label for="i-config-2">Interlocutor configuration:</label>
+            <span class="d-flex">
+              <textarea id="i-config-2" rows="5" autocomplete="off" spellcheck="false"></textarea>
+            </span>
+          </p>
+          <p>
+            <label for="password-2">Password:</label>
+            <input type="password" id="password-2" placeholder="min. length: 10" maxlength="100" autocomplete="off">
+          </p>
+          <p class="text-center">
+            <button type="button" onclick="createConfiguration2()">Create and copy configuration</button>
+          </p>
+          <p id="my-config-p-2" class="d-none">
+            <span>My configuration:</span><br>
+            <span id="my-config-2" class="wb-all"></span><br><br>
+            <span>Copied. Send your configuration to your interlocutor to start communication.</span>
+          </p>
+        </div>
+        <div id="tab-3" class="d-none">
+          <p>
+            <label for="i-config-3">Interlocutor configuration:</label>
+            <span class="d-flex">
+              <textarea id="i-config-3" rows="5" autocomplete="off" spellcheck="false"></textarea>
+            </span>
+          </p>
+          <p>
+            <label for="password-3">Password:</label>
+            <input type="password" id="password-3" maxlength="100" autocomplete="off">
+          </p>
+          <p class="text-center">
+            <button type="button" onclick="generateEncryptionKey()">Generate encryption key</button><br>
+            <small>This will take some time and the page will appear frozen.</small>
+          </p>
+          <p id="message-p" class="d-none">
+            <label for="message">Message:</label>
+            <span class="d-flex">
+              <textarea id="message" rows="5" autocomplete="off"></textarea>
+            </span>
+          </p>
+          <p id="encrypt-decrypt-p" class="text-center d-none">
+            <button type="button" id="encrypt" onclick="encryptMessage()">Encrypt and copy</button>
+            <button type="button" onclick="decryptMessage()">Decrypt</button>
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/big-integer/1.6.52/BigInteger.min.js" integrity="sha512-9Ep9DTmyYR7ilaRntBdTgdiAWg/hDjwbkgxjt04LAZdHWdo5k0eQoxmvdjz99hPSvh7R2M2LWk3DvaWer6f9mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" integrity="sha512-a+SUDuwNzXDvz4XrIcXHuCf089/iJAoN4lmrXJg18XnduKK6YlDHNRalv4yd1N40OKI80tFidF+rqTFKGPoWFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="DHParameters_2048bit.min.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+body {
+    background-color: #303030;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.3;
+    margin: 0;
+}
+.container {
+    max-width: 750px;
+    margin-right: auto;
+    margin-left: auto;   
+}
+.card {
+    color: #000;
+    background-color: #eeeeee;
+    padding: 16px;
+    margin: 8px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px #000000bd;
+}
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    color: #303030;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    margin: 0;
+}
+nav {
+    padding: 10px 0 0 0;
+}
+input, textarea {
+    color: #000;
+    background-color: #eeeeee;
+    border: solid 1px #808080;
+    border-radius: 6px;
+    display: block;
+    width: 100%;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.3;
+    box-sizing: border-box;
+    margin: 4px 0 0 0;
+}
+input {
+    height: 34px;
+    padding: 0 10px;
+}
+textarea {
+    padding: 4px 10px;
+    scrollbar-width: 0;
+}
+input:focus, textarea:focus {
+    background-color: #fff;
+}
+input::placeholder, textarea::placeholder {
+    color: #808080;
+    opacity: 1;
+}
+input[type=range] {
+    cursor: pointer;
+    padding: 0;
+}
+button {
+    color: #fff;
+    background-color: #2a51becc;
+    min-height: 34px;
+    padding: 4px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s ease-in-out;
+}
+button:hover {
+    background-color: #2a52be;
+}
+.tab {
+    color: #000;
+    background-color: transparent;
+    border-bottom: solid 2px #bbbbbb;
+    border-radius: 0;
+    margin: 2px 0;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+.tab:hover {
+    background-color: #fff;
+}
+.tab.selected {
+    border-color: #2a52be;
+}
+.text-center {
+    text-align: center;
+}
+.d-flex {
+    display: flex;
+}
+.d-none {
+    display: none;
+}
+.wb-all {
+    word-break: break-all;
+}
+a {
+    color: #2a52be;
+    border-bottom: solid 1px #2a51be80;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+a:hover {
+    color: #c60c30;
+    border-color: #c60c3180;
+}
+svg, small {
+    color: #505050;
+}
