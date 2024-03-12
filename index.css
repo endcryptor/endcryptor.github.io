@@ -8,7 +8,7 @@ body {
 .container {
     max-width: 750px;
     margin-right: auto;
-    margin-left: auto;   
+    margin-left: auto;
 }
 .card {
     color: #000;
@@ -20,7 +20,7 @@ body {
 }
 h1 {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    color: #3d3d3d;
+    color: #333333;
     letter-spacing: 1px;
     margin: 0;
     padding: 0 0 2px 0;
@@ -32,7 +32,7 @@ input, textarea {
     color: #000;
     background-color: #eeeeee;
     border: solid 1px #808080;
-    border-radius: 6px;
+    border-radius: 5px;
     display: block;
     width: 100%;
     font-family: system-ui, -apple-system, sans-serif;
@@ -60,26 +60,37 @@ input[type=range] {
     cursor: pointer;
     padding: 0;
 }
-button {
-    color: #fff;
-    background-color: #2a51becc;
-    min-height: 34px;
-    padding: 4px 10px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
+.btn, .tab {
     font-family: system-ui, -apple-system, sans-serif;
     font-size: 16px;
+    cursor: pointer;
+}
+.btn {
+    color: #fff;
+    background-color: #2a51becc;
+    border: none;
+    border-radius: 100px;
+    box-shadow: 0 3px 0 0 #222222;
+    padding: 6px 12px 7px 12px;
     transition: background-color 0.2s ease-in-out;
 }
-button:hover {
+.btn:hover {
     background-color: #2a52be;
+}
+.btn:active {
+    box-shadow: inset 0 0 0 1px #222222;
+    transform: translateY(3px);
 }
 .tab {
     color: #000;
     background-color: transparent;
     border-bottom: solid 2px #bbbbbb;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    box-shadow: none;
     border-radius: 0;
+    padding: 6px 8px;
     margin: 2px 0;
     transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
