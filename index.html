@@ -37,7 +37,7 @@
             <small>Increasing the iterations increases the encryption key generation time.</small>
           </p>
           <p class="text-center">
-            <button type="button" onclick="createConfiguration1()">Create and copy configuration</button>
+            <button type="button" class="btn" onclick="createConfiguration1()">Create and copy configuration</button>
           </p>
           <p id="my-config-p-1" class="d-none">
             <span>My configuration:</span><br>
@@ -57,7 +57,7 @@
             <input type="password" id="password-2" placeholder="min. length: 10" maxlength="100" autocomplete="off">
           </p>
           <p class="text-center">
-            <button type="button" onclick="createConfiguration2()">Create and copy configuration</button>
+            <button type="button" class="btn" onclick="createConfiguration2()">Create and copy configuration</button>
           </p>
           <p id="my-config-p-2" class="d-none">
             <span>My configuration:</span><br>
@@ -77,8 +77,8 @@
             <input type="password" id="password-3" maxlength="100" autocomplete="off">
           </p>
           <p class="text-center">
-            <button type="button" onclick="generateEncryptionKey()">Generate encryption key</button><br>
-            <small>This will take some time and the page will appear frozen.</small>
+            <button type="button" class="btn" onclick="generateEncryptionKey()">Generate encryption key</button><br>
+            <small>This will take some time and the page will be frozen.</small>
           </p>
           <p id="message-p" class="d-none">
             <label for="message">Message:</label>
@@ -87,8 +87,8 @@
             </span>
           </p>
           <p id="encrypt-decrypt-p" class="text-center d-none">
-            <button type="button" id="encrypt" onclick="encryptMessage()">Encrypt and copy</button>
-            <button type="button" onclick="decryptMessage()">Decrypt</button>
+            <button type="button" class="btn" id="encrypt" onclick="encryptMessage()">Encrypt and copy</button>
+            <button type="button" class="btn" onclick="decryptMessage()">Decrypt</button>
           </p>
         </div>
       </div>
