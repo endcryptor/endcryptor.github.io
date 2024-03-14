@@ -11,17 +11,14 @@ function createConfiguration1() {
     const p = bigInt(DHParameters[randomIndex][1]);
     const privateKey = passwordToPrivateKey(password, p);
     const publicKey = bigInt(g).modPow(privateKey, p);
-    const salt = CryptoJS.lib.WordArray.random(32);
     const iterations = parseInt(document.getElementById('iterations').value);
-    const config = JSON.stringify({
-        g: g,
-        p: p.toString(),
-        publicKey: publicKey.toString(),
-        salt: CryptoJS.enc.Base64.stringify(salt),
-        iterations: iterations
-    });
-    navigator.clipboard.writeText(config).then(() => {
-        document.getElementById('my-config-1').textContent = config;
+    const salt = CryptoJS.lib.WordArray.random(32);
+    let myConf = `${g.toString()}_${p.toString()}_`;
+    myConf += `${publicKey.toString()}_`;
+    myConf += `${iterations.toString()}_`;
+    myConf += `${CryptoJS.enc.Base64.stringify(salt)}`;
+    navigator.clipboard.writeText(myConf).then(() => {
+        document.getElementById('my-config-1').textContent = myConf;
         document.getElementById('my-config-p-1').classList.remove('d-none');
     });
 }
@@ -32,20 +29,17 @@ function createConfiguration2() {
         alert('Password must be longer than 9');
         return;
     }
-    const conf = JSON.parse(document.getElementById('i-config-2').value);
-    const g = parseInt(conf.g);
-    const p = bigInt(conf.p);
+    const conf = document.getElementById('i-config-2').value.split('_');
+    const g = parseInt(conf[0]);
+    const p = bigInt(conf[1]);
     const privateKey = passwordToPrivateKey(password, p);
     const publicKey = bigInt(g).modPow(privateKey, p);
-    const config = JSON.stringify({
-        g: g,
-        p: p.toString(),
-        publicKey: publicKey.toString(),
-        salt: conf.salt,
-        iterations: conf.iterations
-    });
-    navigator.clipboard.writeText(config).then(() => {
-        document.getElementById('my-config-2').textContent = config;
+    let myConf = `${g.toString()}_${p.toString()}_`;
+    myConf += `${publicKey.toString()}_`;
+    myConf += `${conf[3]}_`;
+    myConf += `${conf[4]}`;
+    navigator.clipboard.writeText(myConf).then(() => {
+        document.getElementById('my-config-2').textContent = myConf;
         document.getElementById('my-config-p-2').classList.remove('d-none');
     });
 }
@@ -56,11 +50,11 @@ function generateEncryptionKey() {
         alert('Password must be longer than 9');
         return;
     }
-    const conf = JSON.parse(document.getElementById('i-config-3').value);
-    const p = bigInt(conf.p);
-    const publicKeyB = bigInt(conf.publicKey);
-    const salt = CryptoJS.enc.Base64.parse(conf.salt);
-    const iterations = parseInt(conf.iterations);
+    const conf = document.getElementById('i-config-3').value.split('_');
+    const p = bigInt(conf[1]);
+    const publicKeyB = bigInt(conf[2]);
+    const iterations = parseInt(conf[3]);
+    const salt = CryptoJS.enc.Base64.parse(conf[4]);
     const privateKey = passwordToPrivateKey(password, p);
     const sharedKey = bigInt(publicKeyB).modPow(privateKey, p).toString();
     encryptionKey = CryptoJS.PBKDF2(sharedKey, salt, {
@@ -78,11 +72,9 @@ function encryptMessage() {
     }
     const iv = CryptoJS.lib.WordArray.random(16);
     const ciphertext = CryptoJS.AES.encrypt(message, encryptionKey, {iv: iv});
-    const ciphertextConfig = JSON.stringify({
-        iv: CryptoJS.enc.Base64.stringify(iv),
-        ciphertext: ciphertext.toString()
-    });
-    navigator.clipboard.writeText(ciphertextConfig).then(() => {
+    let encryptedMessage = `${CryptoJS.enc.Base64.stringify(iv)}_`;
+    encryptedMessage += `${ciphertext.toString()}`;
+    navigator.clipboard.writeText(encryptedMessage).then(() => {
         document.getElementById('encrypt').textContent = 'Copied';
         document.getElementById('message').value = '';
         setTimeout(() => {
@@ -96,9 +88,9 @@ function decryptMessage() {
     if (message.length == 0) {
         return;
     }
-    const ciphertextConfig = JSON.parse(message);
-    const iv = CryptoJS.enc.Base64.parse(ciphertextConfig.iv);
-    const ciphertext = ciphertextConfig.ciphertext;
+    const encryptedMessage = message.split('_');
+    const iv = CryptoJS.enc.Base64.parse(encryptedMessage[0]);
+    const ciphertext = encryptedMessage[1];
     const plaintext = CryptoJS.AES.decrypt(ciphertext, encryptionKey, {iv: iv});
     const plaintextElement = document.createElement('p');
     plaintextElement.textContent = plaintext.toString(CryptoJS.enc.Utf8);
